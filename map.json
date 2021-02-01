@@ -25,7 +25,7 @@
                 {
                  "name":"jitsiRoom",
                  "type":"string",
-                 "value":"https:\/\/cx.party.pschwind.de"
+                 "value":"cx"
                 }],
          "type":"tilelayer",
          "visible":true,
