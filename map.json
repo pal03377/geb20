@@ -26,11 +26,6 @@
                  "name":"jitsiRoom",
                  "type":"string",
                  "value":"pauls-geb-citizen-x"
-                }, 
-                {
-                 "name":"openWebsite",
-                 "type":"string",
-                 "value":"https:\/\/pschwind.de"
                 }],
          "type":"tilelayer",
          "visible":true,
