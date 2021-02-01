@@ -44,11 +44,6 @@
                  "name":"openWebsite",
                  "type":"string",
                  "value":"https:\/\/pschwind.de"
-                }, 
-                {
-                 "name":"openWebsiteTrigger",
-                 "type":"string",
-                 "value":"onaction"
                 }],
          "type":"tilelayer",
          "visible":true,
