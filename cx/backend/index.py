@@ -70,6 +70,39 @@ def attack(from_usr, to_usr):
     return "Angriff wurde durchgeführt."
 
 
+@app.route("/send/<to_usr>/<message>")
+def send(to_usr, message):
+    messages_table.insert(dict(
+        to=to_usr, 
+        message=message
+    ))
+    return "Deine Nachricht an " + to_usr + " wurde gesendet."
+
+
+@app.route("/switch_weapons/<usr_1>/<usr_2>")
+def switch_weapons(usr_1, usr_2):
+    people = get_people()
+    w_1 = people[usr_1]["weapon"]
+    w_2 = people[usr_2]["weapon"]
+    users_table.update(dict(
+        name=usr_1, 
+        weapon=w_2
+    ), ["name"])
+    users_table.update(dict(
+        name=usr_2, 
+        weapon=w_1
+    ), ["name"])
+    messages_table.insert(dict(
+        to=usr_1, 
+        message="Deine Waffenstärke wurde mit " + usr_2 + " getauscht."
+    ))
+    messages_table.insert(dict(
+        to=usr_2, 
+        message="Deine Waffenstärke wurde mit " + usr_1 + " getauscht."
+    ))
+    return "Du hast deine Waffe mit " + usr_2 + " getauscht."
+
+
 all_roles = ["Staatsanwalt", "Apothekerin", "Inspektor", "Hochstapler", "Zombie", "Zombie", 
              "Detektiv", "Landstreicher", "Psychologe", "Schlafwandler", "Lehrerin", "Raeuber", 
              "Pastor", "Zombie", "Erfinder", "Gaertner"]

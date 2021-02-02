@@ -22,7 +22,7 @@
 <p>Koma-Patienten sind diejenigen Leute, die genauso oft angetippt wurden, wie ihre Waffenstärke anzeigt. Die Apothekerin kann pro Nacht bis zu eine Person aus dem Koma befreien.</p>
 
 {#if getNumberOfAttacks(username, data) >= data.people[username].weapon}
-    <b style="color: red;">Du befindest dich selbst im Koma oder bist überwältigt und kannst daher keine anderen Koma-Patienten sehen!</b>
+    <b style="color: red;">Du befindest dich selbst im Koma oder bist überwältigt und kannst daher keine anderen Koma-Patienten sehen!</b><br>
 {:else}
     {#if inComa.length > 0}
         <ul>

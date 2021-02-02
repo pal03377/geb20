@@ -1,6 +1,6 @@
 <script>
 
-    import { backendURL } from "../config";
+    import { backendURL } from "../config.js";
 
     export let username;
     export let data;
@@ -10,7 +10,7 @@
     async function attack(toAttack) {
         loading = true;
         try {
-            alert(await fetch(backendURL + "/attack/" + username + "/" + toAttack).then(resp => resp.text()));
+            alert(await fetch(backendURL + "/attack/" + encodeURIComponent(username) + "/" + encodeURIComponent(toAttack)).then(resp => resp.text()));
         } catch (e) {
             alert("Das hat nicht geklappt :-( " + e);
         }
@@ -20,6 +20,11 @@
 </script>
 
 <h1>Jemanden angreifen</h1>
+<p>
+    Zombies (und der Schlafwandler) können nachts Personen angreifen. Jeder darf pro Nacht nur eine Person einmal angreifen.<br>
+    Leute, die genauso oft angegriffen werden, wie ihre Waffenstärke angibt, fallen ins Koma und können von der Apothekerin gerettet werden (oder werden ansonsten zu Zombies).<br>
+    Leute, die öfter angegriffen werden, als ihre Waffenstärke angibt, werden in der nächsten Nacht garantiert zu Zombies und müssen den Zombies ihre alte Rolle vermitteln.
+</p>
 {#if loading}
     <p>Einen Moment...</p>
 {:else}

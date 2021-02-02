@@ -20,6 +20,6 @@
     {/if}
 </p>
 {#if data.messages[username]}
-Außerdem wurden dir folgende anonyme Nachrichten gesendet:
-<code>{ data.messages[username] }</code>
+Außerdem wurden dir folgende anonyme Nachrichten gesendet:<br>
+<code>{ data.messages[username] }</code><br><br>
 {/if}
