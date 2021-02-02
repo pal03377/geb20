@@ -10,6 +10,7 @@
 	import ZombifiedPeople from "./actions/ZombifiedPeople.svelte";
 	import Message from "./actions/Message.svelte";
 	import Weapons from "./actions/Weapons.svelte";
+	import Roles from "./actions/Roles.svelte";
 
 	let data = {
 		day: 0, 
@@ -43,6 +44,7 @@
 		{ text: "Koma-Patienten", forRoles: "Apothekerin und Pastor", component: Coma }, 
 		{ text: "Zombifiziert", forRoles: "Inspektor und Pastor", component: ZombifiedPeople }, 
 		{ text: "Waffen", forRoles: "Räuber und Detektiv als Zombie", component: Weapons }, 
+		{ text: "Rollen", forRoles: "Detektiv", component: Roles }, 
 		{ text: "Nachricht", forRoles: "kommunikative Rollen", component: Message }, 
 	];
 
