@@ -1,0 +1,38 @@
+<script>
+
+async function kick(user) {
+    alert(
+        await fetch(location.pathname + "/kick/" + encodeURIComponent(user)).then(resp => resp.text())
+    );
+    location.reload();
+}
+async function start() {
+    alert(
+        await fetch(location.pathname + "/start").then(resp => resp.text())
+    );
+}
+async function increaseDay() {
+    alert(
+        await fetch(location.pathname + "/next_day").then(resp => resp.text())
+    );
+}
+async function decreaseDay() {
+    alert(
+        await fetch(location.pathname + "/last_day").then(resp => resp.text())
+    );
+}
+
+</script>
+
+<p>People:</p>
+<ul>
+{% for p in people %}
+    <li>{{ p }} <button onclick="kick('{{ p }}')">kick</button></li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<button onclick="start()">Start</button>
+<button onclick="increaseDay()">Next day</button>
+<button onclick="decreaseDay()">Last day (for correctness)</button>
