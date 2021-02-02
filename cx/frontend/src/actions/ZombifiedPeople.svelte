@@ -28,7 +28,7 @@
         <li>{ zombifiedPerson }</li>
         {/each}
     </ul>
-    <p>Diese Personen sind (außer evtl. durch den Pastor) nicht zu retten. Sie werden nächste Runde zu Zombies.</p>
+    <p>Diese Personen sind nicht zu retten. Sie werden nächste Runde zu Zombies.</p>
 {:else}
     <p>Es wurde niemand zombifiziert.</p>
 {/if}
