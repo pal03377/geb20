@@ -10,16 +10,22 @@ async function start() {
     alert(
         await fetch(location.pathname + "/start").then(resp => resp.text())
     );
+    location.reload();
 }
 async function increaseDay() {
     alert(
         await fetch(location.pathname + "/next_day").then(resp => resp.text())
     );
+    location.reload();
 }
-async function decreaseDay() {
-    alert(
-        await fetch(location.pathname + "/last_day").then(resp => resp.text())
-    );
+
+async function reset() {
+    if (confirm("Reset game?")) {
+        alert(
+            await fetch(location.pathname + "/reset").then(resp => resp.text())
+        );
+        location.reload();
+    }
 }
 
 </script>
@@ -35,4 +41,7 @@ async function decreaseDay() {
 
 <button onclick="start()">Start</button>
 <button onclick="increaseDay()">Next day</button>
-<button onclick="decreaseDay()">Last day (for correctness)</button>
+
+<hr>
+
+<button onclick="reset()">Reset</button>

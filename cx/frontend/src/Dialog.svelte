@@ -33,12 +33,13 @@
 
     .popup {
         position: absolute;
-        width: 300px;
+        width: 600px;
         height: 100%;
         margin: 0 auto;
         left: 0;
         right: 0;
         background-color: white;
+        overflow-y: auto;
     }
 
     .bg {

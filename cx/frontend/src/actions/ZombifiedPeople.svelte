@@ -13,13 +13,14 @@
                 zombified.push(usr);
             }
         }
+        zombified = zombified.filter(p => data.protects.indexOf(p) < 0);
     }
 
 </script>
 
 
 <h1>Zombifizierte Personen</h1>
-<p>Zombifizierte Personen sind diejenigen Leute, die öfter angetippt wurden, als ihre Waffenstärke anzeigt.</p>
+<p>Zombifizierte Personen sind diejenigen Leute, die öfter angetippt wurden, als ihre Waffenstärke anzeigt. Geschützte Personen werden nicht angezeigt.</p>
 
 {#if zombified.length > 0}
     <ul>
@@ -27,7 +28,7 @@
         <li>{ zombifiedPerson }</li>
         {/each}
     </ul>
-    <p>Diese Personen sind (außer evtl. durch den Pastor) nicht zu retten. Sie werden nächste Runde zu Zombies.</p>
+    <p>Diese Personen sind nicht zu retten. Sie werden nächste Runde zu Zombies.</p>
 {:else}
-    Es wurde niemand zombifiziert.
+    <p>Es wurde niemand zombifiziert.</p>
 {/if}
