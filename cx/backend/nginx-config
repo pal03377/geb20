@@ -1,17 +1,17 @@
 server {
 
-    server_name stabue.pschwind.de;
+    server_name cx.party.pschwind.de;
 
     client_max_body_size 100M;
 
 
     location @flask_app {
         include uwsgi_params;
-        uwsgi_pass unix:/run/stabue/socket.sock;
+        uwsgi_pass unix:/run/citizenx/socket.sock;
     }
 
     location / {
-        root /home/stabue/stabue-counter/frontend/public;
+        root /var/www/geb20/cx/frontend/public;
         try_files $uri @flask_app;
 
 

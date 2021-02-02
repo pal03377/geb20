@@ -1,10 +1,10 @@
 [Unit]
-Description=uWSGI instance to serve the StaBueCounter server
+Description=uWSGI instance to serve the Citizen X server
 After=network.target
 
 [Service]
 User=stabue
-ExecStart=/home/stabue/venv/bin/uwsgi --ini /home/stabue/stabue-counter/backend/uwsgi.ini
+ExecStart=/var/www/geb20/cx/backend/venv/bin/uwsgi --ini /var/www/geb20/cx/backend/uwsgi.ini
 RuntimeDirectory=stabue
 
 [Install]
