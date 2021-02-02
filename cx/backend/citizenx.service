@@ -3,13 +3,13 @@ Description=uWSGI instance to serve the Citizen X server
 After=network.target
 
 [Service]
-User=stabue
+User=www-data
 ExecStart=/var/www/geb20/cx/backend/venv/bin/uwsgi --ini /var/www/geb20/cx/backend/uwsgi.ini
-RuntimeDirectory=stabue
+RuntimeDirectory=citizenx
 
 [Install]
 WantedBy=multi-user.target
 
-# save in /etc/systemd/system/stabue.service
+# save in /etc/systemd/system/citizenx.service
 # git config core.fileMode false
-# sudo systemctl start stabue
+# sudo systemctl start citizenx
