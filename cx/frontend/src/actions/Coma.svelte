@@ -9,17 +9,23 @@
     $: {
         inComa = [];
         for (let usr of Object.keys(data.people)) {
-            if (data.people[usr].weapon === getNumberOfAttacks(usr, data)) {
-                inComa.push(usr);
+            let numberOfAttacks = getNumberOfAttacks(usr, data);
+            if (numberOfAttacks > 0) {
+                if (data.people[usr].weapon === numberOfAttacks) {
+                    inComa.push(usr);
+                }
             }
         }
+        inComa = inComa.filter(p => data.protects.indexOf(p) < 0);
     }
 
 </script>
 
 
 <h1>Koma-Patienten</h1>
-<p>Koma-Patienten sind diejenigen Leute, die genauso oft angetippt wurden, wie ihre Waffenstärke anzeigt. Die Apothekerin kann pro Nacht bis zu eine Person aus dem Koma befreien.</p>
+<p>
+    Koma-Patienten sind diejenigen Leute, die genauso oft angetippt wurden, wie ihre Waffenstärke anzeigt. 
+    Die Apothekerin kann pro Nacht bis zu eine Person aus dem Koma befreien. Geschützte Personen werden nicht angezeigt.</p>
 
 {#if getNumberOfAttacks(username, data) >= data.people[username].weapon}
     <b style="color: red;">Du befindest dich selbst im Koma oder bist überwältigt und kannst daher keine anderen Koma-Patienten sehen!</b><br>

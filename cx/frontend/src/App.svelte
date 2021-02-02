@@ -8,9 +8,10 @@
 	import Attack from "./actions/Attack.svelte";
 	import Coma from "./actions/Coma.svelte";
 	import ZombifiedPeople from "./actions/ZombifiedPeople.svelte";
-	import Message from "./actions/Message.svelte";
-	import Weapons from "./actions/Weapons.svelte";
 	import Roles from "./actions/Roles.svelte";
+	import Weapons from "./actions/Weapons.svelte";
+	import Protect from "./actions/Protect.svelte";
+	import Message from "./actions/Message.svelte";
 
 	let data = {
 		day: 0, 
@@ -26,10 +27,14 @@
 	setInterval(refreshData, 2000);
 
 	let username = localStorage.getItem("username");
-	let tmpUsername = "";
+	let tmpUsername = username || "";
+
+	let loading = false;
 
 	async function chooseUsername() {
+		loading = true;
 		let resp = await fetch(backendURL + "/register_user/" + encodeURIComponent(tmpUsername)).then(resp => resp.json());
+		loading = false;
 		if (!resp) {
 			alert("Diesen Namen hat schon eine andere Person gewählt :-(");
 		} else {
@@ -40,32 +45,37 @@
 
 	const actions = [
 		{ text: "Tages-Info", forRoles: "alle", component: ViewInfo }, 
-		{ text: "Jmd. angreifen", forRoles: "Zombies", component: Attack }, 
+		{ text: "Angreifen", forRoles: "Zombies", component: Attack }, 
 		{ text: "Koma-Patienten", forRoles: "Apothekerin und Pastor", component: Coma }, 
 		{ text: "Zombifiziert", forRoles: "Inspektor und Pastor", component: ZombifiedPeople }, 
-		{ text: "Waffen", forRoles: "Räuber und Detektiv als Zombie", component: Weapons }, 
 		{ text: "Rollen", forRoles: "Detektiv", component: Roles }, 
+		{ text: "Waffen", forRoles: "Räuber, Erfinder und Detektiv als Zombie", component: Weapons }, 
+		{ text: "Beschützen", forRoles: "Pastor", component: Protect }, 
 		{ text: "Nachricht", forRoles: "kommunikative Rollen", component: Message }, 
 	];
 
 </script>
 
 <main>
-	{#if !username || !data.people[username]}
-		<input bind:value={ tmpUsername } placeholder="Dein Name">
-		<button on:click={ chooseUsername }>OK</button>
+	{#if loading}
+		Einen Moment...
 	{:else}
-		<p>Name: { username }</p>
-		{#if data.day === 0}
-			Warte auf Spielstart...
+		{#if !username || !data.people[username]}
+			<input bind:value={ tmpUsername } placeholder="Dein Name">
+			<button on:click={ chooseUsername }>OK</button>
 		{:else}
-			<p>Tag / Nacht: { data.day }</p>
-			<p>Rolle: { data.people[username].role }</p>
-			<p>Waffe: { data.people[username].weapon }</p>
+			<p>Name: { username }</p>
+			{#if data.day === 0}
+				Warte auf Spielstart...
+			{:else}
+				<p>Tag / Nacht: { data.day }</p>
+				<p>Rolle: { data.people[username].role }</p>
+				<p>Waffe: { data.people[username].weapon }</p>
+				{#each actions as action}
+					<Action { ...action } { username } { data } />
+				{/each}
+			{/if}
 		{/if}
-		{#each actions as action}
-			<Action { ...action } { username } { data } />
-		{/each}
 	{/if}
 </main>
 

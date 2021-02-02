@@ -39,6 +39,7 @@
         left: 0;
         right: 0;
         background-color: white;
+        overflow-y: auto;
     }
 
     .bg {

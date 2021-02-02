@@ -13,6 +13,7 @@ day_table = db["day"]
 users_table = db["users"]
 attacks_table = db["attacks"]
 messages_table = db["messages"]
+protected_table = db["protected"]
 
 
 def get_day():
@@ -32,6 +33,12 @@ def get_attacks():
     for attack in attacks_table.all():
         attacks.append(attack["on"])
     return attacks
+
+def get_protects():
+    protects = []
+    for pr in protected_table.all():
+        protects.append(pr["name"])
+    return protects
 
 def get_messages():
     messages = {}
@@ -57,12 +64,14 @@ def data():
         "day": get_day(), 
         "people": get_people(), 
         "attacks": get_attacks(), 
+        "protects": get_protects(), 
         "messages": get_messages()
     }
 
 
 @app.route("/attack/<from_usr>/<to_usr>")
 def attack(from_usr, to_usr):
+    print("attack", from_usr, to_usr)
     attacks_table.insert(dict(
         by=from_usr, 
         on=to_usr
@@ -72,6 +81,7 @@ def attack(from_usr, to_usr):
 
 @app.route("/send/<to_usr>/<message>")
 def send(to_usr, message):
+    print("send", to_usr, message)
     messages_table.insert(dict(
         to=to_usr, 
         message=message
@@ -81,6 +91,7 @@ def send(to_usr, message):
 
 @app.route("/switch_weapons/<usr_1>/<usr_2>")
 def switch_weapons(usr_1, usr_2):
+    print("switch_weapons", usr_1, usr_2)
     people = get_people()
     w_1 = people[usr_1]["weapon"]
     w_2 = people[usr_2]["weapon"]
@@ -103,9 +114,34 @@ def switch_weapons(usr_1, usr_2):
     return "Du hast deine Waffe mit " + usr_2 + " getauscht."
 
 
-all_roles = ["Staatsanwalt", "Apothekerin", "Inspektor", "Hochstapler", "Zombie", "Zombie", 
+@app.route("/protect/<by_usr>/<usr>")
+def protect(by_usr, usr):
+    print("protect", by_usr, usr)
+    people = get_people()
+    if people[by_usr]["role"] == PASTOR:
+        if people[usr]["role"] == ZOMBIE:
+            messages_table.insert(dict(
+                to=by_usr, 
+                message="Du hast versucht, als Pastor einen Zombie zu schützen und dich damit geopfert. Du bist jetzt auch ein Zombie."
+            ))
+    protected_table.insert(dict(
+        name=usr, 
+        by=by_usr
+    ))
+    messages_table.insert(dict(
+        to=usr, 
+        message="Du warst heute Nacht geschützt (" + str(people[by_usr]["role"]) +  ")."
+    ))
+    return "Du schützt diese Nacht " + usr + " vor Zombies."
+
+
+ZOMBIE = "Zombie"
+PASTOR = "Pastor"
+INVENTOR = "Erfinder"
+GARDENER = "Gaertner"
+all_roles = ["Staatsanwalt", "Apothekerin", "Inspektor", "Hochstapler", ZOMBIE, ZOMBIE, 
              "Detektiv", "Landstreicher", "Psychologe", "Schlafwandler", "Lehrerin", "Raeuber", 
-             "Pastor", "Zombie", "Erfinder", "Gaertner"]
+             PASTOR, ZOMBIE, INVENTOR, GARDENER]
 all_weapons = [3, 2, 2, 2, 1, 1, 1, 0, 3, 1, 2, 0, 4, 2, 4, 3]
 def assign_roles_and_weapons():
     people = get_people()
@@ -150,14 +186,36 @@ def start():
     day_table.insert(dict(day=1))
     return "started"
 
+@app.route("/admin/reset")
+def reset():
+    day_table.delete()
+    users_table.delete()
+    attacks_table.delete()
+    messages_table.delete()
+    protected_table.delete()
+    return "reset"
+
 @app.route("/admin/next_day")
 def next_day():
-    day_table.insert(dict(day=get_day() + 1))
+    people = get_people()
+    new_day = get_day() + 1
+    for p in people:
+        # increase their weapon score of inventor
+        if people[p]["role"] == INVENTOR:
+            people[p]["weapon"] += 1
+            users_table.update(dict(
+                name=p, 
+                weapon=people[p]["weapon"]
+            ), ["name"])
+        # auto-protect gardener every 2nd night
+        if people[p]["role"] == GARDENER and new_day % 2 == 0:
+            protect(p, p) # protects himself
+    # clear data
+    attacks_table.delete()
+    messages_table.delete()
+    protected_table.delete()
+    day_table.insert(dict(day=new_day))
     return "Next day started"
-@app.route("/admin/last_day")
-def last_day():
-    day_table.delete(day=get_day())
-    return "Went back to last day"
 
 
 if __name__ == "__main__":

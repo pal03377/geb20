@@ -21,7 +21,7 @@
 
 <h1>Jemanden angreifen</h1>
 <p>
-    Zombies (und der Schlafwandler) können nachts Personen angreifen. Jeder darf pro Nacht nur eine Person einmal angreifen.<br>
+    Zombies (und der Schlafwandler) können nachts Personen angreifen. Jeder darf pro Nacht nur eine Person einmal angreifen (Ausnahme: Gärtner).<br>
     Leute, die genauso oft angegriffen werden, wie ihre Waffenstärke angibt, fallen ins Koma und können von der Apothekerin gerettet werden (oder werden ansonsten zu Zombies).<br>
     Leute, die öfter angegriffen werden, als ihre Waffenstärke angibt, werden in der nächsten Nacht garantiert zu Zombies und müssen den Zombies ihre alte Rolle vermitteln.
 </p>
