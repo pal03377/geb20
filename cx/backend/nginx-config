@@ -12,7 +12,8 @@ server {
 
     location / {
         root /var/www/geb20/cx/frontend/public;
-        try_files $uri @flask_app;
+        index index.html;
+        try_files @flask_app $uri;
 
 
         # kill cache https://stackoverflow.com/a/45285696/4306257
