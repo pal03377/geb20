@@ -10,11 +10,15 @@ server {
         uwsgi_pass unix:/run/citizenx/socket.sock;
     }
 
+    location @flask_app {
+        include uwsgi_params;
+        uwsgi_pass unix:/run/citizenx/socket.sock;
+    }
+
     location / {
         root /var/www/geb20/cx/frontend/public;
         index index.html;
-        try_files @flask_app $uri;
-
+        try_files $uri $uri/ @flask_app;
 
         # kill cache https://stackoverflow.com/a/45285696/4306257
         add_header Last-Modified $date_gmt;
@@ -23,5 +27,6 @@ server {
         expires off;
         etag off;
     }
+
 
 }
