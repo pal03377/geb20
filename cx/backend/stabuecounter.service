@@ -1,0 +1,15 @@
+[Unit]
+Description=uWSGI instance to serve the StaBueCounter server
+After=network.target
+
+[Service]
+User=stabue
+ExecStart=/home/stabue/venv/bin/uwsgi --ini /home/stabue/stabue-counter/backend/uwsgi.ini
+RuntimeDirectory=stabue
+
+[Install]
+WantedBy=multi-user.target
+
+# save in /etc/systemd/system/stabue.service
+# git config core.fileMode false
+# sudo systemctl start stabue

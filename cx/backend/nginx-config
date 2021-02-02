@@ -1,0 +1,26 @@
+server {
+
+    server_name stabue.pschwind.de;
+
+    client_max_body_size 100M;
+
+
+    location @flask_app {
+        include uwsgi_params;
+        uwsgi_pass unix:/run/stabue/socket.sock;
+    }
+
+    location / {
+        root /home/stabue/stabue-counter/frontend/public;
+        try_files $uri @flask_app;
+
+
+        # kill cache https://stackoverflow.com/a/45285696/4306257
+        add_header Last-Modified $date_gmt;
+        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+        if_modified_since off;
+        expires off;
+        etag off;
+    }
+
+}
