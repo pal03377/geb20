@@ -61,6 +61,8 @@
 		Einen Moment...
 	{:else}
 		{#if !username || !data.people[username]}
+			<h1>Citizen X</h1>
+			<span>Wie heißt du? </span>
 			<input bind:value={ tmpUsername } placeholder="Dein Name">
 			<button on:click={ chooseUsername }>OK</button>
 		{:else}
