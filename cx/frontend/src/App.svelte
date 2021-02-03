@@ -1,9 +1,10 @@
 <script>
 
-	import { backendURL } from "./config";
+	import { backendURL } from "./config.js";
 
 	import Action from "./Action.svelte";
 
+	import RoleInfo from "./actions/RoleInfo.svelte";
 	import ViewInfo from "./actions/ViewInfo.svelte";
 	import Attack from "./actions/Attack.svelte";
 	import Coma from "./actions/Coma.svelte";
@@ -44,14 +45,15 @@
 	}
 
 	const actions = [
-		{ text: "Tages-Info", forRoles: "alle", component: ViewInfo }, 
-		{ text: "Angreifen", forRoles: "Zombies", component: Attack }, 
-		{ text: "Koma-Patienten", forRoles: "Apothekerin und Pastor", component: Coma }, 
-		{ text: "Zombifiziert", forRoles: "Inspektor und Pastor", component: ZombifiedPeople }, 
-		{ text: "Rollen", forRoles: "Detektiv", component: Roles }, 
-		{ text: "Waffen", forRoles: "Räuber, Erfinder und Detektiv als Zombie", component: Weapons }, 
-		{ text: "Beschützen", forRoles: "Pastor", component: Protect }, 
-		{ text: "Nachricht", forRoles: "kommunikative Rollen", component: Message }, 
+		{ text: "Rollen-Info", forRoles: true, component: RoleInfo }, 
+		{ text: "Tages-Info", forRoles: true, component: ViewInfo }, 
+		{ text: "Angreifen", forRoles: ["Zombie"], maybeRelevant: true, component: Attack }, 
+		{ text: "Koma-Patienten", forRoles: ["Apothekerin", "Pastor"], component: Coma }, 
+		{ text: "Zombifiziert", forRoles: ["Inspektor", "Pastor"], component: ZombifiedPeople }, 
+		{ text: "Rollen", forRoles: ["Detektiv"], component: Roles }, 
+		{ text: "Waffen", forRoles: ["Raeuber", "Erfinder", "Detektiv"], component: Weapons }, 
+		{ text: "Beschützen", forRoles: ["Pastor"], component: Protect }, 
+		{ text: "Nachricht", forRoles: ["Lehrerin"], component: Message }, 
 	];
 
 </script>
@@ -66,13 +68,24 @@
 			<input bind:value={ tmpUsername } placeholder="Dein Name">
 			<button on:click={ chooseUsername }>OK</button>
 		{:else}
-			<p>Name: { username }</p>
+			<p class="name">{ username }</p>
 			{#if data.day === 0}
 				Warte auf Spielstart...
 			{:else}
-				<p>Tag / Nacht: { data.day }</p>
-				<p>Rolle: { data.people[username].role }</p>
-				<p>Waffe: { data.people[username].weapon }</p>
+				<div class="infoBlock">
+					<div class="card currentDay">
+						<h2>Tag / Nacht</h2>
+						<span>{ data.day }</span>
+					</div>
+					<div class="card role">
+						<h2>Rolle</h2>
+						<span>{ data.people[username].role }</span>
+					</div>
+					<div class="card weapon">
+						<h2>Waffe</h2>
+						<span>{ data.people[username].weapon }</span>
+					</div>
+				</div>
 				{#each actions as action}
 					<Action { ...action } { username } { data } />
 				{/each}
@@ -82,6 +95,7 @@
 </main>
 
 <style>
+
 	main {
 		text-align: center;
 		padding: 1em;
@@ -94,4 +108,35 @@
 			max-width: none;
 		}
 	}
+
+	.name {
+		position: absolute;
+		top: 8px;
+		right: 16px;
+	}
+
+	.infoBlock {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 16px;
+	}
+
+	.infoBlock>.card {
+		margin: 0 16px;
+		text-align: left;
+
+	}
+
+	.infoBlock>.card h2 {
+		margin: 0;
+		font-weight: normal;
+		font-size: 18px;
+	}
+
+	.infoBlock>.card span {
+		margin: 0;
+		font-weight: bold;
+		font-size: 22px;
+	}
+
 </style>

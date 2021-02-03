@@ -21,7 +21,7 @@
 </script>
 
 <h1>Anonyme Nachricht</h1>
-<p>Sende eine anonyme Nachricht an eine andere Person, z.B. wenn du als Apothekerin heilst.</p>
+<p class="description">Sende eine anonyme Nachricht an eine andere Person, z.B. als Lehrerin.</p>
 {#if loading}
     <p>Einen Moment...</p>
 {:else}

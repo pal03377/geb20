@@ -38,7 +38,8 @@
         margin: 0 auto;
         left: 0;
         right: 0;
-        background-color: white;
+        background-color: black;
+        border: 1px solid rgba(255, 255, 255, .5);
         overflow-y: auto;
     }
 

@@ -20,7 +20,7 @@
 </script>
 
 <h1>Jemanden beschützen</h1>
-<p>
+<p class="description">
     Der Pastor kann in der dritten Nacht bis zu 5 Personen beschützen, die dann nicht zu Zombies werden können. 
     Ist ein Zombie unter den Beschützten, opfert sich der Pastor.<br>
     Der Gärtner wird jede 2. Nacht automatisch beschützt.
