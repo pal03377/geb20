@@ -48,7 +48,7 @@
 		{ text: "Rollen-Info", forRoles: true, component: RoleInfo }, 
 		{ text: "Tages-Info", forRoles: true, component: ViewInfo }, 
 		{ text: "Angreifen", forRoles: ["Zombie"], maybeRelevant: true, component: Attack }, 
-		{ text: "Koma-Patienten", forRoles: ["Apothekerin", "Pastor"], component: Coma }, 
+		{ text: "Koma", forRoles: ["Apothekerin", "Pastor"], component: Coma }, 
 		{ text: "Zombifiziert", forRoles: ["Inspektor", "Pastor"], component: ZombifiedPeople }, 
 		{ text: "Rollen", forRoles: ["Detektiv"], component: Roles }, 
 		{ text: "Waffen", forRoles: ["Raeuber", "Erfinder", "Detektiv"], component: Weapons }, 
