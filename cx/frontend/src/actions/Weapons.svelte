@@ -20,7 +20,9 @@
 </script>
 
 <h1>Waffen</h1>
-<p>Der Räuber kann jede Nacht zwei Waffenkarten ansehen und mit seiner eigenen tauschen. Ein Zombie-Detektiv kann jede Nacht eine anschauen.</p>
+<p class="description">
+    Der Räuber kann jede Nacht zwei Waffenkarten ansehen und mit seiner eigenen tauschen. Ein Zombie-Detektiv kann jede Nacht eine anschauen.
+</p>
 {#if loading}
     <p>Einen Moment...</p>
 {:else}

@@ -36,7 +36,7 @@
 
 
 <h1>Koma-Patienten</h1>
-<p>
+<p class="description">
     Koma-Patienten sind diejenigen Leute, die genauso oft angetippt wurden, wie ihre Waffenstärke anzeigt. 
     Die Apothekerin kann pro Nacht bis zu eine Person aus dem Koma befreien. Geschützte Personen werden nicht angezeigt.</p>
 

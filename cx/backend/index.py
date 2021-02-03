@@ -170,6 +170,11 @@ def assign_roles_and_weapons():
         }, ["name"])
 
 
+@app.route("/all_roles")
+def get_all_roles():
+    return json.dumps(list(set(all_roles)))
+
+
 @app.route("/admin")
 def admin():
     return render_template("admin.html", people=get_people())

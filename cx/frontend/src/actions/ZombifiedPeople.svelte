@@ -20,7 +20,9 @@
 
 
 <h1>Zombifizierte Personen</h1>
-<p>Zombifizierte Personen sind diejenigen Leute, die öfter angetippt wurden, als ihre Waffenstärke anzeigt. Geschützte Personen werden nicht angezeigt.</p>
+<p class="description">
+    Zombifizierte Personen sind diejenigen Leute, die öfter angetippt wurden, als ihre Waffenstärke anzeigt. Geschützte Personen werden nicht angezeigt.
+</p>
 
 {#if zombified.length > 0}
     <ul>
