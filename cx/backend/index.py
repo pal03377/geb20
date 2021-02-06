@@ -141,8 +141,8 @@ INVENTOR = "Erfinder"
 GARDENER = "Gaertner"
 all_roles = ["Staatsanwalt", "Apothekerin", "Inspektor", "Hochstapler", ZOMBIE, ZOMBIE, 
              "Detektiv", "Landstreicher", "Psychologe", "Schlafwandler", "Lehrerin", "Raeuber", 
-             PASTOR, ZOMBIE, INVENTOR, GARDENER]
-all_weapons = [3, 2, 2, 2, 1, 1, 1, 0, 3, 1, 2, 0, 4, 2, 4, 3]
+             PASTOR, ZOMBIE, INVENTOR, GARDENER, "Hochstapler", "Hochstapler", "Hochstapler", "Hochstapler"]
+all_weapons = [3, 2, 2, 2, 1, 1, 1, 0, 3, 1, 2, 0, 4, 2, 4, 3, 0, 1, 0, 1]
 def assign_roles_and_weapons():
     people = get_people()
     n = len(people.keys())
