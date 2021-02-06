@@ -15,13 +15,6 @@
                 document.write("[Alle Fenster befinden sich jetzt in neuen Tabs. Um sie hierher zurückzubekommen, laufe aus der Raum-Zone in WorkAdventure raus und wieder rein.]");
             }
         }
-        // pass through Jitsi Meet external commands
-        function passThrough(evt) {
-            document.getElementById("jitsi").contentWindow.postMessage(
-                evt.data, "*"
-            );
-        }
-        window.addEventListener("message", passThrough, false);
     </script>
 
 </head>
