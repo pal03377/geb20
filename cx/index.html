@@ -18,7 +18,7 @@
         // pass through Jitsi Meet external commands
         function passThrough(evt) {
             document.getElementById("jitsi").contentWindow.postMessage(
-                evt.data, evt.origin
+                evt.data, "*"
             );
         }
         window.addEventListener("message", passThrough, false);
